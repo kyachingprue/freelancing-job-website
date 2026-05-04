@@ -1,4 +1,5 @@
 import Banner from "../components/Banner";
+import Semantic from "../components/Semantic";
 import TopBanner from "../components/TopBanner";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
         <TopBanner />
       </section>
       <Banner />
+      <Semantic/>
     </div>
   )
 };

@@ -6,7 +6,7 @@ import Home from "../pages/Home";
 
 const MainLayout = () => {
   return (
-    <div className="min-h-screen px-3 bg-gray-100">
+    <div className="min-h-screen px-3 bg-gray-200">
       <PageLoader/>
       <Navbar />
       <Home />

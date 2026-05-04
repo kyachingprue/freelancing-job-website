@@ -46,7 +46,7 @@ const Navbar = () => {
       }`}
       >
         {/* LOGO */}
-        <div className="text-xl text-white font-semibold">Rise at Seven</div>
+        <div className="text-xl md:text-3xl text-white font-semibold">Rise at Seven</div>
 
         {/* MENU */}
         <div className="hidden md:flex items-center gap-6 text-sm md:text-base font-medium">

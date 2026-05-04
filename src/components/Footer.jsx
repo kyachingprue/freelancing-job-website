@@ -25,7 +25,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-[#0b0b0b] text-white rounded-3xl mx-2 my-6 px-6 md:px-12 py-12 relative">
+    <footer className="bg-[#0b0b0b] text-white rounded-3xl my-6 px-6 md:px-12 py-12">
       {/* Top Section */}
       <motion.div
         variants={container}
@@ -105,17 +105,13 @@ const Footer = () => {
       </motion.div>
 
       {/* Huge Background Text */}
-      <motion.h1
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 0.08, y: 0 }}
-        transition={{ duration: 1 }}
-        className="absolute bottom-16 left-4 md:left-10 text-[60px] md:text-[160px] font-bold whitespace-nowrap pointer-events-none"
+      <h1 className="text-[60px] md:text-[165px] font-bold "
       >
         Rise at Seven®
-      </motion.h1>
+      </h1>
 
       {/* Bottom Bar */}
-      <div className="relative z-10 mt-20 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+      <div className="relative z-10 mt-20 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-gray-50 gap-4">
         <p>
           © 2025 Rise at Seven Ltd. All rights reserved • Company Number
           11955187 • VAT Registered GB 322402945 • Privacy Policy • Terms &
