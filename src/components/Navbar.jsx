@@ -41,33 +41,35 @@ const Navbar = () => {
       px-6 py-3 flex items-center justify-between transition-all duration-300
       ${
         isScrolled
-          ? 'top-3 bg-white/70 backdrop-blur-lg rounded-full shadow-md'
-          : 'top-24 bg-transparent'
+          ? 'top-3 bg-white/70 backdrop-blur-lg text-black rounded-full shadow-md'
+          : 'top-24 bg-transparent text-white'
       }`}
       >
         {/* LOGO */}
-        <div className="text-xl md:text-3xl text-white font-semibold">Rise at Seven</div>
+        <div className="text-xl md:text-2xl text-inherit font-semibold">
+          Rise at Seven
+        </div>
 
         {/* MENU */}
         <div className="hidden md:flex items-center gap-6 text-sm md:text-base font-medium">
-          <div className="flex items-center text-white gap-1 cursor-pointer">
+          <div className="flex items-center text-inherit gap-1 cursor-pointer">
             Services <ChevronDown size={16} />
           </div>
-          <div className="flex items-center text-white gap-1 cursor-pointer">
+          <div className="flex items-center text-inherit gap-1 cursor-pointer">
             International <ChevronDown size={16} />
           </div>
-          <div className="flex items-center text-white gap-1 cursor-pointer">
+          <div className="flex items-center text-inherit gap-1 cursor-pointer">
             About <ChevronDown size={16} />
           </div>
-          <span className="text-white">Work</span>
-          <span className="text-white">Careers</span>
-          <span className="text-white">Blog</span>
-          <span className="text-white">Webinr</span>
+          <span className="text-inherit">Work</span>
+          <span className="text-inherit">Careers</span>
+          <span className="text-inherit">Blog</span>
+          <span className="text-inherit">Webinr</span>
         </div>
 
         {/* BUTTON */}
         <div className="hidden md:flex">
-          <button className="flex items-center text-sm md:text-lg gap-2 bg-white font-medium text-black px-6 py-3 rounded-full hover:scale-105 transition">
+          <button className="flex items-center text-sm md:text-lg gap-2 bg-white font-medium text-black px-4 py-2 rounded-full hover:scale-105 transition">
             Get In Touch <ArrowUpRight size={16} />
           </button>
         </div>

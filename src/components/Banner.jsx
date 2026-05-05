@@ -86,29 +86,28 @@ const Banner = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-6 text-xl md:text-3xl font-bold text-white"
+          className="mt-6 mb-20 text-xl md:text-3xl font-bold text-white"
         >
           on every searchable platform
         </motion.p>
-
-        {/* Bottom Text */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-10 text-sm text-gray-300 max-w-2xl mx-auto"
-        >
-          Organic media planners creating, distributing & optimising
-          search-first content for SEO, Social, PR, AI and LLM search
-        </motion.p>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-6 left-6 text-xs md:text-base text-white text-start font-medium"
+      >
+        Organic media planners creating, distributing & optimising <br />
+        search-first content for SEO, Social, PR, AI and LLM search
+      </motion.div>
 
       {/* Bottom Right Info */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1 }}
-        className="absolute bottom-6 right-6 text-xs md:text-sm text-gray-300 text-right"
+        className="absolute bottom-6 right-6 text-xs md:text-base text-white font-medium text-right"
       >
         4 Global Offices serving <br />
         UK, USA (New York) & EU
