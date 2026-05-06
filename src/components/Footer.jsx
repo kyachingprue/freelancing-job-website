@@ -25,7 +25,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-[#0b0b0b] text-white rounded-3xl my-6 px-6 md:px-12 py-12">
+    <footer className="bg-[#0b0b0b] text-white rounded-3xl mt-6 px-6 md:px-12 py-12">
       {/* Top Section */}
       <motion.div
         variants={container}
