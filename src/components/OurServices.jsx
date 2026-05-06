@@ -4,27 +4,28 @@ import { ArrowUpRight } from 'lucide-react'
 const services = [
   {
     title: 'Digital PR',
-    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d'
+    image: 'https://i.ibb.co.com/ynm2sY6V/shutterstock-1171378096-540x304-1.jpg'
   },
   {
     title: 'Search & Growth Strategy',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71'
+    image:
+      'https://i.ibb.co.com/jv5LYQ88/digital-marketing-trends-2026-ai-search-customer-journey.jpg'
   },
   {
     title: 'Data & Insights',
-    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c'
+    image: 'https://i.ibb.co.com/GfYbGD7M/Data-Analytics-770x400.jpg'
   },
   {
     title: 'Organic Social & Content',
-    image: 'https://images.unsplash.com/photo-1492724441997-5dc865305da7'
+    image: 'https://i.ibb.co.com/Z1JVfRvY/Managing-Organic-Social-Banner.jpg'
   },
   {
     title: 'Content Experience',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c'
+    image: 'https://i.ibb.co.com/M5Ww0H4f/levels-of-experience-levels.png'
   },
   {
     title: 'Onsite SEO',
-    image: 'https://images.unsplash.com/photo-1508830524289-0adcbe822b40'
+    image: 'https://i.ibb.co.com/CKNTyqXF/image-1.png'
   }
 ]
 
@@ -32,25 +33,25 @@ export default function OurServices() {
   const [hovered, setHovered] = useState(null)
 
   return (
-    <section className="w-full py-16 px-6 md:px-16">
+    <section className="w-full py-16 px-5">
       {/* Header */}
-      <div className="flex items-center justify-between mb-10">
-        <h2 className="text-5xl font-semibold flex items-center gap-4">
+      <div className="flex items-center justify-between pb-10 border-b border-gray-400">
+        <h2 className="text-7xl font-semibold flex items-center gap-4">
           <span>Our</span>
           <img
             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-            className="w-14 h-14 rounded-xl object-cover"
+            className="w-20 h-20 rounded-2xl object-cover"
           />
           <span>Services</span>
         </h2>
 
-        <button className="px-5 py-2 rounded-full bg-white shadow hover:bg-black hover:text-white transition">
+        <button className="px-5 py-2 rounded-full mt-8 bg-white shadow hover:bg-black hover:text-white transition">
           View All Services ↗
         </button>
       </div>
 
       {/* Services Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-5">
         {services.map((item, index) => (
           <div
             key={index}
@@ -62,8 +63,8 @@ export default function OurServices() {
             <div
               className={`absolute inset-0 transition-all duration-500 ease-in-out ${
                 hovered === index
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-110'
+                  ? 'opacity-100'
+                  : 'opacity-0'
               }`}
             >
               <img
@@ -72,14 +73,14 @@ export default function OurServices() {
                 className="w-full h-full rounded-full object-cover"
               />
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/30 rounded-full" />
+              <div className="absolute inset-0 bg-black/40 rounded-full" />
             </div>
 
             {/* Content */}
             <div className="relative z-10 flex items-center justify-between">
               <h3
-                className={`text-3xl flex items-center gap-4 font-medium transition-all duration-300 ${
-                  hovered === index ? 'text-white px-6' : 'text-black'
+                className={`text-5xl flex items-center gap-2 font-medium transition-all duration-300 ${
+                  hovered === index ? 'text-white px-3' : 'text-black'
                 }`}
               >
                 <ArrowUpRight size={38}

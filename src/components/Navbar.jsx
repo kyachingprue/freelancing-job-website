@@ -42,7 +42,7 @@ const Navbar = () => {
       ${
         isScrolled
           ? 'top-3 bg-white/70 backdrop-blur-lg text-black rounded-full shadow-md'
-          : 'top-24 bg-transparent text-white'
+          : 'top-16 bg-transparent text-white'
       }`}
       >
         {/* LOGO */}

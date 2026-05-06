@@ -1,10 +1,11 @@
 import AnimatedSection from "../components/AnimatedSection";
 import Banner from "../components/Banner";
+import CardScroll from "../components/CardScroll";
+import CardSection from "../components/CardSection";
 import HeroCursorSection from "../components/HeroCursorSection";
 import LetterAnimation from "../components/LetterAnimation";
 import OurServices from "../components/OurServices";
 import Semantic from "../components/Semantic";
-import StackedCards from "../components/StackedCards";
 import TopBanner from "../components/TopBanner";
 
 const Home = () => {
@@ -18,7 +19,8 @@ const Home = () => {
       <AnimatedSection />
       <OurServices />
       <HeroCursorSection />
-      <StackedCards />
+      <CardScroll />
+      <CardSection/>
       <LetterAnimation/>
     </div>
   )

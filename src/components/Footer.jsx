@@ -25,30 +25,30 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-[#0b0b0b] text-white rounded-3xl mt-6 px-6 md:px-12 py-12">
+    <footer className="bg-[#070505f1] text-white rounded-3xl mt-6 md:px-8 py-12">
       {/* Top Section */}
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-4 gap-10"
+        className="grid grid-cols-1 md:grid-cols-5 gap-5"
       >
         {/* Left: Newsletter */}
-        <motion.div variants={item} className="md:col-span-1">
-          <h2 className="text-xl font-semibold mb-6">
+        <motion.div variants={item} className="md:col-span-2">
+          <h2 className="text-xl md:text-3xl font-bold mb-6">
             Stay updated with Rise news
           </h2>
 
           {/* Input */}
-          <div className="flex items-center bg-white/10 rounded-full p-1 backdrop-blur-md">
+          <div className="flex items-center bg-white/10 rounded-full mr-24 backdrop-blur-md">
             <input
               type="email"
               placeholder="Your Email Address"
-              className="flex-1 bg-transparent outline-none px-4 py-2 text-sm placeholder-gray-400"
+              className="flex-1 bg-transparent outline-none px-8 py-4 text-2xl placeholder-gray-400"
             />
-            <button className="bg-[#a8e6cf] hover:bg-[#8dd8be] text-black p-2 rounded-full transition">
-              <ArrowUpRight size={18} />
+            <button className="bg-[#a8e6cf] hover:bg-[#8dd8be] mr-4 text-black p-4 rounded-full transition">
+              <ArrowUpRight size={20} />
             </button>
           </div>
 
@@ -75,7 +75,7 @@ const Footer = () => {
 
         {/* Links */}
         <motion.div variants={item}>
-          <ul className="space-y-3 text-gray-300">
+          <ul className="space-y-1 text-2xl text-white font-medium border-l border-gray-600 pl-4">
             <li className="hover:text-white cursor-pointer">Services</li>
             <li className="hover:text-white cursor-pointer">Work</li>
             <li className="hover:text-white cursor-pointer">About</li>
@@ -85,7 +85,7 @@ const Footer = () => {
         </motion.div>
 
         <motion.div variants={item}>
-          <ul className="space-y-3 text-gray-300">
+          <ul className="space-y-1 text-2xl text-white font-medium border-l border-gray-600 pl-4">
             <li className="hover:text-white cursor-pointer">Testimonials</li>
             <li className="hover:text-white cursor-pointer">Blog</li>
             <li className="hover:text-white cursor-pointer">Webinars</li>
@@ -94,7 +94,7 @@ const Footer = () => {
         </motion.div>
 
         <motion.div variants={item}>
-          <ul className="space-y-3 text-gray-300">
+          <ul className="space-y-1 text-2xl text-white font-medium border-l border-gray-600 pl-4">
             <li className="hover:text-white cursor-pointer">Sheffield</li>
             <li className="hover:text-white cursor-pointer">Manchester</li>
             <li className="hover:text-white cursor-pointer">London</li>
@@ -105,10 +105,7 @@ const Footer = () => {
       </motion.div>
 
       {/* Huge Background Text */}
-      <h1 className="text-[60px] md:text-[165px] font-bold "
-      >
-        Rise at Seven®
-      </h1>
+      <h1 className="text-[60px] md:text-[165px] font-bold ">Rise at Seven®</h1>
 
       {/* Bottom Bar */}
       <div className="relative z-10 mt-20 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-gray-50 gap-4">

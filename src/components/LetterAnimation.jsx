@@ -1,49 +1,64 @@
-import { motion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
+import { useScroll, useTransform, motion } from 'motion/react'
 
 const text = 'Ready to Rise at Seven?'
+
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.05
+    }
+  }
+}
+
+const letterVariant = {
+  hidden: {
+    opacity: 0,
+    y: 80,
+    rotate: 10
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 120
+    }
+  }
+}
 
 const LetterAnimation = () => {
   const ref = useRef(null)
 
-  // scroll progress
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start']
   })
 
+  const x = useTransform(scrollYProgress, [0, 1], ['100%', '-100%'])
+
   return (
     <section ref={ref} className="h-[200vh]">
-      <div className="sticky top-0 h-40 flex items-center overflow-hidden justify-center">
-        <div className="flex whitespace-nowrap">
-          {text.split('').map((char, index) => {
-            // stagger effect (each letter slightly delayed)
-            const start = index * 0.03
-            const end = start + 0.6
-
-            const x = useTransform(
-              scrollYProgress,
-              [start, end],
-              ['120%', '-120%']
-            )
-
-            const opacity = useTransform(
-              scrollYProgress,
-              [start, start + 0.1, end - 0.1, end],
-              [0, 1, 1, 0]
-            )
-
-            return (
-              <motion.span
-                key={index}
-                style={{ x, opacity }}
-                className="text-black text-9xl font-bold mx-0.5"
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            )
-          })}
-        </div>
+      <div className="sticky top-0 h-40 flex items-center overflow-hidden">
+        <motion.div
+          style={{ x }}
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          className="flex whitespace-nowrap"
+        >
+          {text.split('').map((char, index) => (
+            <motion.span
+              key={index}
+              variants={letterVariant}
+              className="text-6xl md:text-8xl font-bold inline-block"
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+        </motion.div>
       </div>
     </section>
   )
