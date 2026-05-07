@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
+import { motion } from 'motion/react'
+import AnimatedButton from './AnimatedButton'
 
 const services = [
   {
@@ -31,6 +33,7 @@ const services = [
 
 export default function OurServices() {
   const [hovered, setHovered] = useState(null)
+  const [isServicesHover, setIsServicesHover] = useState(false)
 
   return (
     <section className="w-full py-16 px-5">
@@ -45,9 +48,20 @@ export default function OurServices() {
           <span>Services</span>
         </h2>
 
-        <button className="px-5 py-2 rounded-full mt-8 bg-white shadow hover:bg-black hover:text-white transition">
-          View All Services ↗
-        </button>
+        <motion.button
+          onHoverStart={() => setIsServicesHover(true)}
+          onHoverEnd={() => setIsServicesHover(false)}
+          animate={{
+            borderRadius: isServicesHover ? '12px' : '9999px'
+          }}
+          transition={{
+            duration: 0.35,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+          className="px-5 py-3 text-sm md:text-base font-medium rounded-full mt-8 bg-white shadow"
+        >
+          <AnimatedButton text="View All Services" />
+        </motion.button>
       </div>
 
       {/* Services Grid */}
@@ -62,9 +76,7 @@ export default function OurServices() {
             {/* Background Image */}
             <div
               className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                hovered === index
-                  ? 'opacity-100'
-                  : 'opacity-0'
+                hovered === index ? 'opacity-100' : 'opacity-0'
               }`}
             >
               <img
@@ -83,7 +95,8 @@ export default function OurServices() {
                   hovered === index ? 'text-white px-3' : 'text-black'
                 }`}
               >
-                <ArrowUpRight size={38}
+                <ArrowUpRight
+                  size={38}
                   className={`transition-all duration-300 ${
                     hovered === index
                       ? 'opacity-100 translate-x-0 text-white'

@@ -1,7 +1,7 @@
 import { AlarmClock, ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
-import { CgArrowTopRight } from 'react-icons/cg'
+import AnimatedButton from './AnimatedButton'
 
 const cards = [
   {
@@ -38,7 +38,6 @@ const cards = [
 const Card = ({ item }) => {
   const [hovered, setHovered] = useState(false)
   const [cursor, setCursor] = useState({ x: 0, y: 0 })
-
 
   return (
     <div
@@ -93,7 +92,9 @@ const Card = ({ item }) => {
             }}
           >
             <div className="w-32 h-32 bg-sky-300 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-xl"><ArrowUpRight size={44} /></span>
+              <span className="text-xl">
+                <ArrowUpRight size={44} />
+              </span>
             </div>
           </div>
         )}
@@ -106,9 +107,9 @@ const Card = ({ item }) => {
       </div>
 
       <div className="flex items-center gap-1.5 my-6 px-2">
-        <div className="flex items-center gap-2 bg-white rounded-full py-1.5 px-3">
+        <div className="flex items-center gap-2 bg-white rounded-full py-1 px-1.5">
           <img
-            className="w-5 h-5 rounded-full object-cover"
+            className="w-6 h-6 rounded-full object-cover"
             src={item.photo}
             alt="Card owner image"
           />
@@ -129,16 +130,34 @@ const Card = ({ item }) => {
 }
 
 export default function CardSection() {
+  const [isExploreHover, setIsExploreHover] = useState(false)
   return (
     <div className="max-w-7xl mx-auto pb-10">
-      <div className='flex pb-10 border-gray-400 border-b items-center justify-between'>
-        <div className='text-3xl flex items-center md:text-7xl font-bold'>
+      <div className="flex pb-10 border-gray-400 border-b items-center justify-between">
+        <div className="text-3xl flex items-center md:text-7xl font-bold">
           What's{' '}
-          <img className='w-20 h-20 rounded-2xl object-cover' src="https://i.ibb.co.com/qFL5hzcn/girl-singing-at-an-outdoor-concert-free-photo.jpg" alt='Music girl image'/>{' '}
+          <img
+            className="w-20 h-20 rounded-2xl object-cover"
+            src="https://i.ibb.co.com/qFL5hzcn/girl-singing-at-an-outdoor-concert-free-photo.jpg"
+            alt="Music girl image"
+          />{' '}
           New
         </div>
         <div>
-          <button className='flex items-center mt-10 font-semibold gap-2 bg-white text-black py-2.5 text-sm md:text-lg px-4 rounded-full'>Explore More Thoughts <CgArrowTopRight/> </button>
+          <motion.button
+            onHoverStart={() => setIsExploreHover(true)}
+            onHoverEnd={() => setIsExploreHover(false)}
+            animate={{
+              borderRadius: isExploreHover ? '12px' : '9999px'
+            }}
+            transition={{
+              duration: 0.35,
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            className="flex items-center mt-10 font-semibold gap-2 bg-white text-black py-3 text-sm md:text-lg px-4"
+          >
+            <AnimatedButton text="Explore More Thoughts" />
+          </motion.button>
         </div>
       </div>
       <div className="grid gap-6 grid-cols-1 mt-10 sm:grid-cols-2 lg:grid-cols-3">

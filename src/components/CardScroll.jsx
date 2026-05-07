@@ -41,7 +41,7 @@ function Card({ card, i, scrollYProgress, total }) {
   const rotate = useTransform(
     scrollYProgress,
     [start, end],
-    [0, -40] // 🔥 সব card same direction tilt
+    [0, -40] 
   )
 
   return (

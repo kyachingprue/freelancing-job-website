@@ -1,11 +1,14 @@
-import { ArrowRightIcon } from "lucide-react";
-import image from "../assets/announcement.jpg"
-import LogoSlider from "./LogoSlider";
+import image from '../assets/announcement.jpg'
+import LogoSlider from './LogoSlider'
+import AnimatedButton from './AnimatedButton'
+import {motion} from 'motion/react'
+import { useState } from 'react'
 
 const Semantic = () => {
+  const [isStoryHover, setIsStoryHover] = useState(false)
   return (
     <section className="w-full py-10">
-      <LogoSlider/>
+      <LogoSlider />
       <div className="px-4 py-12 flex justify-between items-center flex-col md:flex-row gap-6">
         <div className="flex-1">
           <h2 className="text-2xl font-bold pb-24 text-black">
@@ -27,17 +30,28 @@ const Semantic = () => {
           </h2>
           {/* Button */}
           <div className="pt-6 flex items-center gap-4">
-            <button className="bg-white text-black flex gap-3 items-center font-medium py-3 px-5 rounded-full">
-              Our Story <ArrowRightIcon size={20} />{' '}
-            </button>
+            <motion.button
+              onHoverStart={() => setIsStoryHover(true)}
+              onHoverEnd={() => setIsStoryHover(false)}
+              animate={{
+                borderRadius: isStoryHover ? '12px' : '9999px'
+              }}
+              transition={{
+                duration: 0.35,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              className="bg-white text-black flex gap-3 items-center font-medium py-3 px-5"
+            >
+              <AnimatedButton text="Our Story" />
+            </motion.button>
             <button className=" text-black flex items-center gap-3 font-medium py-3 px-5">
-              Our Services <ArrowRightIcon size={20} />{' '}
+               <AnimatedButton text="Our Services"/>
             </button>
           </div>
         </div>
       </div>
     </section>
   )
-};
+}
 
-export default Semantic;
+export default Semantic

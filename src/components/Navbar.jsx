@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react'
+import AnimatedButton from './AnimatedButton'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showNav, setShowNav] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
 
   // scroll logic
   useEffect(() => {
@@ -69,9 +71,22 @@ const Navbar = () => {
 
         {/* BUTTON */}
         <div className="hidden md:flex">
-          <button className="flex items-center text-sm md:text-lg gap-2 bg-white font-medium text-black px-4 py-2 rounded-full hover:scale-105 transition">
-            Get In Touch <ArrowUpRight size={16} />
-          </button>
+          <motion.button
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
+            animate={{
+              borderRadius: isHovered ? '12px' : '9999px'
+            }}
+            transition={{
+              duration: 0.25,
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            className={`flex items-center text-sm md:text-lg gap-2 font-medium px-4 py-3 ${
+              isScrolled ? 'bg-black text-white' : 'bg-white text-black'
+            }`}
+          >
+            <AnimatedButton text="Get In Touch" />
+          </motion.button>
         </div>
 
         {/* MOBILE ICON */}
