@@ -21,7 +21,7 @@ const cards = [
     name: 'Ray Saddiq',
     title:
       'Synergistically integrate superior meta-services before goal-oriented web services. Progressively .',
-    img: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91'
+    img: 'https://i.ibb.co.com/HDwNTmf4/1678715090291.jpg'
   },
   {
     id: 3,
@@ -133,28 +133,81 @@ export default function CardSection() {
   const [isExploreHover, setIsExploreHover] = useState(false)
   return (
     <div className="max-w-7xl mx-auto pb-10">
-      <div className="flex pb-10 border-gray-400 border-b items-center justify-between">
-        <div className="text-3xl flex items-center md:text-7xl font-bold">
-          What's{' '}
+      <div
+        className="
+  flex
+  flex-col
+  md:flex-row
+  md:items-center
+  md:justify-between
+  gap-6
+  md:gap-10
+  pb-8
+  md:pb-10
+  border-b
+  border-gray-300
+  "
+      >
+        {/* LEFT CONTENT */}
+        <div
+          className="
+    flex
+    items-center
+    flex-wrap
+    gap-3
+    text-4xl
+    sm:text-5xl
+    md:text-7xl
+    font-bold
+    tracking-[-0.04em]
+    leading-none
+    "
+        >
+          <span>What's</span>
+
           <img
-            className="w-20 h-20 rounded-2xl object-cover"
+            className=" w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl object-cover shadow-lg "
             src="https://i.ibb.co.com/qFL5hzcn/girl-singing-at-an-outdoor-concert-free-photo.jpg"
             alt="Music girl image"
-          />{' '}
-          New
+          />
+
+          <span>New</span>
         </div>
-        <div>
+
+        {/* RIGHT BUTTON */}
+        <div className="w-full md:w-auto">
           <motion.button
             onHoverStart={() => setIsExploreHover(true)}
             onHoverEnd={() => setIsExploreHover(false)}
             animate={{
-              borderRadius: isExploreHover ? '12px' : '9999px'
+              borderRadius: isExploreHover ? '16px' : '9999px'
             }}
             transition={{
               duration: 0.35,
               ease: [0.22, 1, 0.36, 1]
             }}
-            className="flex items-center mt-10 font-semibold gap-2 bg-white text-black py-3 text-sm md:text-lg px-4"
+            whileTap={{
+              scale: 0.98
+            }}
+            className="
+      w-full
+      md:w-auto
+      flex
+      items-center
+      justify-center
+      font-semibold
+      gap-2
+      bg-white
+      text-black
+      py-3
+      md:py-4
+      px-5
+      md:px-6
+      text-sm
+      sm:text-base
+      md:text-lg
+      shadow-lg
+      "
           >
             <AnimatedButton text="Explore More Thoughts" />
           </motion.button>

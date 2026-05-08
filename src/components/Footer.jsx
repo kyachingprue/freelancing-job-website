@@ -14,46 +14,155 @@ const Footer = () => {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.15
+        staggerChildren: 0.12
       }
     }
   }
 
   const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    hidden: {
+      opacity: 0,
+      y: 30
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6
+      }
+    }
   }
 
   return (
-    <footer className="bg-[#070505f1] text-white rounded-3xl mt-6 md:px-8 py-12">
-      {/* Top Section */}
+    <footer
+      className="
+      relative
+      overflow-hidden
+      bg-[#070505]
+      text-white
+      rounded-t-[40px]
+      md:rounded-t-[60px]
+      mt-6
+      px-5
+      sm:px-8
+      md:px-10
+      lg:px-14
+      py-12
+      md:py-16
+      "
+    >
+      {/* TOP SECTION */}
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-5 gap-5"
+        className="
+        grid
+        grid-cols-1
+        sm:grid-cols-2
+        lg:grid-cols-5
+        gap-10
+        lg:gap-8
+        relative
+        z-10
+        "
       >
-        {/* Left: Newsletter */}
-        <motion.div variants={item} className="md:col-span-2">
-          <h2 className="text-xl md:text-3xl font-bold mb-6">
-            Stay updated with Rise news
+        {/* NEWSLETTER */}
+        <motion.div variants={item} className="sm:col-span-2 lg:col-span-2">
+          <p
+            className="
+            text-xs
+            uppercase
+            tracking-[0.25em]
+            text-white/50
+            mb-4
+            "
+          >
+            Newsletter
+          </p>
+
+          <h2
+            className="
+            text-3xl
+            sm:text-4xl
+            md:text-5xl
+            font-bold
+            tracking-[-0.04em]
+            leading-tight
+            mb-8
+            "
+          >
+            Stay updated
+            <br />
+            with Rise news
           </h2>
 
-          {/* Input */}
-          <div className="flex items-center bg-white/10 rounded-full mr-24 backdrop-blur-md">
+          {/* INPUT */}
+          <div
+            className="
+            flex
+            items-center
+            bg-white/10
+            border
+            border-white/10
+            rounded-full
+            backdrop-blur-xl
+            overflow-hidden
+            "
+          >
             <input
               type="email"
               placeholder="Your Email Address"
-              className="flex-1 bg-transparent outline-none px-8 py-4 text-2xl placeholder-gray-400"
+              className="
+              flex-1
+              bg-transparent
+              outline-none
+              px-5
+              md:px-7
+              py-4
+              text-sm
+              sm:text-base
+              md:text-lg
+              text-white
+              placeholder:text-gray-400
+              "
             />
-            <button className="bg-[#a8e6cf] hover:bg-[#8dd8be] mr-4 text-black p-4 rounded-full transition">
+
+            <motion.button
+              whileHover={{
+                scale: 1.05
+              }}
+              whileTap={{
+                scale: 0.96
+              }}
+              className="
+              bg-[#a8e6cf]
+              text-black
+              w-12
+              h-12
+              md:w-14
+              md:h-14
+              rounded-full
+              flex
+              items-center
+              justify-center
+              mr-2
+              "
+            >
               <ArrowUpRight size={20} />
-            </button>
+            </motion.button>
           </div>
 
-          {/* Social Icons */}
-          <div className="flex gap-3 mt-6 flex-wrap">
+          {/* SOCIAL */}
+          <div
+            className="
+            flex
+            flex-wrap
+            gap-3
+            mt-7
+            "
+          >
             {[
               FaFacebookF,
               FaTwitter,
@@ -64,58 +173,208 @@ const Footer = () => {
             ].map((Icon, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.2, y: -3 }}
-                className="bg-white/10 p-2 rounded-full cursor-pointer"
+                whileHover={{
+                  scale: 1.1,
+                  y: -4
+                }}
+                whileTap={{
+                  scale: 0.95
+                }}
+                className="
+                w-11
+                h-11
+                rounded-full
+                bg-white/10
+                border
+                border-white/10
+                flex
+                items-center
+                justify-center
+                cursor-pointer
+                "
               >
-                <Icon size={14} />
+                <Icon size={15} />
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Links */}
+        {/* LINK COLUMN 1 */}
         <motion.div variants={item}>
-          <ul className="space-y-1 text-2xl text-white font-medium border-l border-gray-600 pl-4">
-            <li className="hover:text-white cursor-pointer">Services</li>
-            <li className="hover:text-white cursor-pointer">Work</li>
-            <li className="hover:text-white cursor-pointer">About</li>
-            <li className="hover:text-white cursor-pointer">Culture</li>
-            <li className="hover:text-white cursor-pointer">Meet The Risers</li>
+          <p
+            className="
+            text-xs
+            uppercase
+            tracking-[0.2em]
+            text-white/40
+            mb-5
+            "
+          >
+            Company
+          </p>
+
+          <ul
+            className="
+            space-y-3
+            text-lg
+            sm:text-xl
+            font-medium
+            "
+          >
+            {['Services', 'Work', 'About', 'Culture', 'Meet The Risers'].map(
+              link => (
+                <li
+                  key={link}
+                  className="
+                cursor-pointer
+                text-white/80
+                hover:text-white
+                transition-colors
+                "
+                >
+                  {link}
+                </li>
+              )
+            )}
           </ul>
         </motion.div>
 
+        {/* LINK COLUMN 2 */}
         <motion.div variants={item}>
-          <ul className="space-y-1 text-2xl text-white font-medium border-l border-gray-600 pl-4">
-            <li className="hover:text-white cursor-pointer">Testimonials</li>
-            <li className="hover:text-white cursor-pointer">Blog</li>
-            <li className="hover:text-white cursor-pointer">Webinars</li>
-            <li className="hover:text-white cursor-pointer">Careers</li>
+          <p
+            className="
+            text-xs
+            uppercase
+            tracking-[0.2em]
+            text-white/40
+            mb-5
+            "
+          >
+            Resources
+          </p>
+
+          <ul
+            className="
+            space-y-3
+            text-lg
+            sm:text-xl
+            font-medium
+            "
+          >
+            {['Testimonials', 'Blog', 'Webinars', 'Careers'].map(link => (
+              <li
+                key={link}
+                className="
+                cursor-pointer
+                text-white/80
+                hover:text-white
+                transition-colors
+                "
+              >
+                {link}
+              </li>
+            ))}
           </ul>
         </motion.div>
 
+        {/* LINK COLUMN 3 */}
         <motion.div variants={item}>
-          <ul className="space-y-1 text-2xl text-white font-medium border-l border-gray-600 pl-4">
-            <li className="hover:text-white cursor-pointer">Sheffield</li>
-            <li className="hover:text-white cursor-pointer">Manchester</li>
-            <li className="hover:text-white cursor-pointer">London</li>
-            <li className="hover:text-white cursor-pointer">New York</li>
-            <li className="hover:text-white cursor-pointer">Contact</li>
+          <p
+            className="
+            text-xs
+            uppercase
+            tracking-[0.2em]
+            text-white/40
+            mb-5
+            "
+          >
+            Offices
+          </p>
+
+          <ul
+            className="
+            space-y-3
+            text-lg
+            sm:text-xl
+            font-medium
+            "
+          >
+            {['Sheffield', 'Manchester', 'London', 'New York', 'Contact'].map(
+              link => (
+                <li
+                  key={link}
+                  className="
+                cursor-pointer
+                text-white/80
+                hover:text-white
+                transition-colors
+                "
+                >
+                  {link}
+                </li>
+              )
+            )}
           </ul>
         </motion.div>
       </motion.div>
 
-      {/* Huge Background Text */}
-      <h1 className="text-[60px] md:text-[165px] font-bold ">Rise at Seven®</h1>
+      {/* HUGE TEXT */}
+      <div
+        className="
+        relative
+        z-0
+        mt-16
+        md:mt-24
+        overflow-hidden
+        "
+      >
+        <h1
+          className="
+          text-[52px]
+          sm:text-[90px]
+          md:text-[130px]
+          lg:text-[180px]
+          xl:text-[220px]
+          font-bold
+          tracking-[-0.06em]
+          leading-none
+          text-white
+          whitespace-nowrap
+          select-none
+          "
+        >
+          Rise at Seven®
+        </h1>
+      </div>
 
-      {/* Bottom Bar */}
-      <div className="relative z-10 mt-20 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-gray-50 gap-4">
-        <p>
+      {/* BOTTOM BAR */}
+      <div
+        className="
+        relative
+        z-10
+        mt-10
+        md:mt-14
+        pt-6
+        border-t
+        border-white/10
+        flex
+        flex-col
+        md:flex-row
+        md:items-center
+        md:justify-between
+        gap-4
+        text-xs
+        sm:text-sm
+        text-white/60
+        "
+      >
+        <p className="max-w-4xl leading-relaxed">
           © 2025 Rise at Seven Ltd. All rights reserved • Company Number
           11955187 • VAT Registered GB 322402945 • Privacy Policy • Terms &
-          conditions
+          Conditions
         </p>
 
-        <p>Website MadeByShape</p>
+        <p className="whitespace-nowrap">Website MadeByShape</p>
       </div>
     </footer>
   )

@@ -3,36 +3,39 @@ import { motion, useScroll, useSpring, useTransform } from 'motion/react'
 
 const text = 'Ready to Rise at Seven?'
 
+/* =========================================
+   LETTER COMPONENT
+========================================= */
+
 const AnimatedLetter = ({ char, index, progress }) => {
-  /**
-   * TIMING
-   * Each letter comes one by one
-   */
-  const start = index * 0.022
-  const center = start + 0.18
-  const end = center + 0.22
+  /*
+    RESPONSIVE TIMING
+  */
+  const start = index * 0.025
+  const center = start + 0.16
+  const end = center + 0.2
 
-  /**
-   * RIGHT TOP -> CENTER -> LEFT BOTTOM
-   */
-  const x = useTransform(progress, [start, center, end], [1200, 0, -1200])
+  /*
+    RESPONSIVE MOTION
+  */
+  const x = useTransform(progress, [start, center, end], [800, 0, -800])
 
-  const y = useTransform(progress, [start, center, end], [-300, 0, 250])
+  const y = useTransform(progress, [start, center, end], [-180, 0, 180])
 
-  /**
-   * ROTATION
-   */
-  const rotate = useTransform(progress, [start, center, end], [18, 0, -14])
+  /*
+    ROTATION
+  */
+  const rotate = useTransform(progress, [start, center, end], [14, 0, -12])
 
-  /**
-   * SCALE
-   */
-  const scale = useTransform(progress, [start, center], [0.6, 1])
+  /*
+    SCALE
+  */
+  const scale = useTransform(progress, [start, center], [0.75, 1])
 
-  /**
-   * OPACITY
-   */
-  const opacity = useTransform(progress, [start, center - 0.05, end], [0, 1, 0])
+  /*
+    OPACITY
+  */
+  const opacity = useTransform(progress, [start, center - 0.04, end], [0, 1, 0])
 
   return (
     <motion.span
@@ -44,15 +47,16 @@ const AnimatedLetter = ({ char, index, progress }) => {
         opacity
       }}
       className="
-        inline-block
-        text-black
-        font-black
-        leading-none
-        tracking-[-0.09em]
-        text-[90px]
-        sm:text-[120px]
-        md:text-[180px]
-        lg:text-[190px]
+      inline-block
+      text-black
+      font-black
+      leading-none
+      tracking-[-0.08em]
+      text-[42px]
+      sm:text-[70px]
+      md:text-[110px]
+      lg:text-[150px]
+      xl:text-[180px]
       "
     >
       {char === ' ' ? '\u00A0' : char}
@@ -72,19 +76,48 @@ const LetterScrollAnimation = () => {
     offset: ['start end', 'end start']
   })
 
-  /**
-   * Smooth scroll motion
-   */
+  /*
+    SMOOTH SCROLL
+  */
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 20
+    stiffness: 65,
+    damping: 18
   })
 
   return (
-    <section ref={sectionRef} className="relative h-[650vh] bg-[#ececeb]">
-      {/* Sticky area */}
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
-        <div className="flex whitespace-nowrap px-20">
+    <section
+      ref={sectionRef}
+      className="
+      relative
+      h-[320vh]
+      sm:h-[380vh]
+      md:h-[450vh]
+      lg:h-[650vh]
+      "
+    >
+      {/* STICKY AREA */}
+      <div
+        className="
+        sticky
+        top-0
+        h-screen
+        overflow-hidden
+        flex
+        items-center
+        justify-center
+        "
+      >
+        {/* WRAPPER */}
+        <div
+          className="
+          flex
+          whitespace-nowrap
+          px-4
+          sm:px-8
+          md:px-12
+          lg:px-20
+          "
+        >
           {text.split('').map((char, index) => (
             <AnimatedLetter
               key={index}
@@ -94,6 +127,17 @@ const LetterScrollAnimation = () => {
             />
           ))}
         </div>
+
+        {/* MOBILE GRADIENT */}
+        <div
+          className="
+          absolute
+          inset-x-0
+          bottom-0
+          h-24
+          pointer-events-none
+          "
+        />
       </div>
     </section>
   )

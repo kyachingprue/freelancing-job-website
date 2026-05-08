@@ -45,18 +45,32 @@ const projects = [
 function ProjectTextItem({ item, i, scrollYProgress, total }) {
   const segment = 1 / total
 
+  /* START + END TIMING */
   const start = i * segment
-  const end = (i + 1) * segment
+  const end = start + segment * 1.4
 
-  const local = useTransform(scrollYProgress, [start, end], [0, 1])
+  /* TEXT SHOULD START EARLY */
+  const progress = useTransform(
+    scrollYProgress,
+    [start - 0.12, start, end],
+    [0, 0.5, 1]
+  )
 
-  const y = useTransform(local, [0, 0.5, 1], [240, 0, -240])
+  /* MOVE */
+  const y = useTransform(progress, [0, 0.5, 1], [220, 0, -220])
 
-  const opacity = useTransform(local, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+  /* BRIGHTNESS EFFECT */
+  const opacity = useTransform(
+    progress,
+    [0, 0.18, 0.5, 0.82, 1],
+    [0.08, 0.35, 1, 0.35, 0]
+  )
 
-  const blur = useTransform(local, [0, 0.5, 1], [12, 0, 12])
+  /* FADE LIKE IMAGE */
+  const blur = useTransform(progress, [0, 0.5, 1], [10, 0, 10])
 
-  const scale = useTransform(local, [0, 0.5, 1], [0.92, 1, 0.92])
+  /* SCALE */
+  const scale = useTransform(progress, [0, 0.5, 1], [0.9, 1, 0.92])
 
   return (
     <motion.div
@@ -64,25 +78,83 @@ function ProjectTextItem({ item, i, scrollYProgress, total }) {
         y,
         opacity,
         scale,
-        filter: `blur(${blur}px)`
+        filter: useTransform(blur, value => `blur(${value}px)`)
       }}
-      className="absolute inset-0 flex flex-col justify-center"
+      className="
+      absolute
+      left-0
+      top-1/2
+      w-full
+      -translate-y-1/2
+      flex
+      flex-col
+      justify-center
+      will-change-transform
+      "
     >
       <div className="flex items-start gap-3">
         <div>
-          <h2 className="text-white font-black text-[90px] leading-[0.82] tracking-[-5px]">
+          {/* TITLE */}
+          <motion.h2
+            style={{
+              opacity: useTransform(progress, [0, 0.5, 1], [0.2, 1, 0.2])
+            }}
+            className="
+            text-white
+            font-black
+            text-[70px]
+            md:text-[90px]
+            leading-[0.82]
+            tracking-[-5px]
+            "
+          >
             {item.title}
-          </h2>
+          </motion.h2>
 
-          <h3 className="text-white/35 font-black text-[80px] leading-[0.82] tracking-[-5px] -mt-2">
+          {/* SUBTITLE */}
+          <motion.h3
+            style={{
+              opacity: useTransform(progress, [0, 0.5, 1], [0.1, 0.55, 0])
+            }}
+            className="
+            text-white
+            font-black
+            text-[62px]
+            md:text-[80px]
+            leading-[0.82]
+            tracking-[-5px]
+            -mt-2
+            "
+          >
             {item.subtitle}
-          </h3>
+          </motion.h3>
         </div>
 
-        <span className="text-white/70 text-sm mt-5">{item.year}</span>
+        {/* YEAR */}
+        <motion.span
+          style={{
+            opacity: useTransform(progress, [0, 0.5, 1], [0.2, 1, 0])
+          }}
+          className="text-white/70 text-sm mt-5"
+        >
+          {item.year}
+        </motion.span>
       </div>
 
-      <div className="mt-5 h-16 w-[75%] bg-white/10 blur-3xl rounded-full" />
+      {/* GLOW */}
+      <motion.div
+        style={{
+          opacity: useTransform(progress, [0, 0.5, 1], [0, 0.5, 0])
+        }}
+        className="
+        mt-5
+        h-16
+        w-[75%]
+        bg-white/10
+        blur-3xl
+        rounded-full
+        "
+      />
     </motion.div>
   )
 }
@@ -141,7 +213,7 @@ export default function AnimatedSection() {
                 {/* IMAGE COLUMN */}
                 <motion.div
                   style={{
-                    y: useTransform(scrollYProgress, [0, 1], ['0%', '-75%'])
+                    y: useTransform(scrollYProgress, [0, 1], ['0%', '-72%'])
                   }}
                   className="flex flex-col gap-7"
                 >

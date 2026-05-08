@@ -51,16 +51,16 @@ export default function LogoSlider() {
   }, [isDragging, x])
 
   return (
-    <section className="flex py-6 px-5 items-center">
+    <section className="flex flex-col md:flex-row py-6 px-5 items-center">
       {/* TEXT */}
-      <div className="text-base text-black font-medium whitespace-nowrap">
+      <div className="text-base py-4 md:py-0 text-black font-medium whitespace-nowrap">
         The agency behind
       </div>
 
       <div className="relative w-full overflow-hidden py-4 flex items-center">
         {/* LEFT BLUR */}
         <div
-          className="absolute left-0 top-0 h-full w-48 z-20 pointer-events-none"
+          className="absolute left-0 top-0 h-full w-16 md:w-48 z-20 pointer-events-none"
           style={{
             backdropFilter: 'blur(100px)',
             WebkitMaskImage:
@@ -70,7 +70,7 @@ export default function LogoSlider() {
 
         {/* RIGHT BLUR */}
         <div
-          className="absolute right-0 top-0 h-full w-48 z-20 pointer-events-none"
+          className="absolute right-0 top-0 h-full w-16 md:w-48 z-20 pointer-events-none"
           style={{
             backdropFilter: 'blur(60px)',
             WebkitMaskImage:

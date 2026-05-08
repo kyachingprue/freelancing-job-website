@@ -9,9 +9,9 @@ const Semantic = () => {
   return (
     <section className="w-full py-10">
       <LogoSlider />
-      <div className="px-4 py-12 flex justify-between items-center flex-col md:flex-row gap-6">
+      <div className="px-4 py-5 md:py-12 flex justify-between items-center flex-col md:flex-row md:gap-6">
         <div className="flex-1">
-          <h2 className="text-2xl font-bold pb-24 text-black">
+          <h2 className="text-2xl font-bold pb-5 md:pb-24 text-black">
             A global team of search-first content marketers engineering semantic
             relevancy & category <br /> signals for both the internet and people
           </h2>
@@ -29,7 +29,7 @@ const Semantic = () => {
             </span>
           </h2>
           {/* Button */}
-          <div className="pt-6 flex items-center gap-4">
+          <div className="pt-6 flex flex-col md:flex-row items-center gap-4">
             <motion.button
               onHoverStart={() => setIsStoryHover(true)}
               onHoverEnd={() => setIsStoryHover(false)}
