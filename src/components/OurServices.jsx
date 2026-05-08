@@ -38,12 +38,12 @@ export default function OurServices() {
   return (
     <section className="w-full py-16 px-5">
       {/* Header */}
-      <div className="flex items-center justify-between pb-10 border-b border-gray-400">
-        <h2 className="text-7xl font-semibold flex items-center gap-4">
+      <div className="flex flex-col md:flex-row items-center justify-between pb-10 border-b border-gray-400">
+        <h2 className="text-3xl lg:text-7xl font-semibold flex items-center gap-4">
           <span>Our</span>
           <img
             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-            className="w-20 h-20 rounded-2xl object-cover"
+            className="w-12 h-12 md:w-20 md:h-20 rounded-2xl object-cover"
           />
           <span>Services</span>
         </h2>
@@ -91,7 +91,7 @@ export default function OurServices() {
             {/* Content */}
             <div className="relative z-10 flex items-center justify-between">
               <h3
-                className={`text-5xl flex items-center gap-2 font-medium transition-all duration-300 ${
+                className={`text-2xl md:text-5xl flex items-center gap-2 font-medium transition-all duration-300 ${
                   hovered === index ? 'text-white px-3' : 'text-black'
                 }`}
               >

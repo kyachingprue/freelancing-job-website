@@ -1,144 +1,338 @@
-import { motion, useScroll, useTransform } from 'motion/react'
-import { ArrowUpRight } from 'lucide-react'
-import { useRef } from 'react'
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent
+} from 'motion/react'
+import { ArrowUpRight, Search } from 'lucide-react'
+import { useRef, useState } from 'react'
 
-const texts = [
-  'Creative Strategy',
-  'Brand Identity',
-  'Digital Marketing',
-  'Web Development',
-  'UI/UX Design',
-  'Growth Scaling'
+const projects = [
+  {
+    id: 1,
+    year: '[2023-2025]',
+    title: 'SIXT',
+    subtitle: 'Car rental',
+    image:
+      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1600&auto=format&fit=crop'
+  },
+  {
+    id: 2,
+    year: '[2021-2025]',
+    title: 'Dojo - B2B',
+    subtitle: 'Card Machines',
+    image:
+      'https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1600&auto=format&fit=crop'
+  },
+  {
+    id: 3,
+    year: '[2023-2024]',
+    title: 'Magnet',
+    subtitle: 'Trade Platform',
+    image:
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop'
+  },
+  {
+    id: 4,
+    year: '[2022-2024]',
+    title: 'Moonshot',
+    subtitle: 'Creative Agency',
+    image:
+      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop'
+  }
 ]
 
-const cards = [
-  { id: 1, title: 'Project One', img: 'https://picsum.photos/400/600?1' },
-  { id: 2, title: 'Project Two', img: 'https://picsum.photos/400/600?2' },
-  { id: 3, title: 'Project Three', img: 'https://picsum.photos/400/600?3' },
-  { id: 4, title: 'Project Four', img: 'https://picsum.photos/400/600?4' },
-  { id: 5, title: 'Project Five', img: 'https://picsum.photos/400/600?5' },
-  { id: 6, title: 'Project Six', img: 'https://picsum.photos/400/600?6' }
-]
+function ProjectTextItem({ item, i, scrollYProgress, total }) {
+  const segment = 1 / total
+
+  const start = i * segment
+  const end = (i + 1) * segment
+
+  const local = useTransform(scrollYProgress, [start, end], [0, 1])
+
+  const y = useTransform(local, [0, 0.5, 1], [240, 0, -240])
+
+  const opacity = useTransform(local, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+
+  const blur = useTransform(local, [0, 0.5, 1], [12, 0, 12])
+
+  const scale = useTransform(local, [0, 0.5, 1], [0.92, 1, 0.92])
+
+  return (
+    <motion.div
+      style={{
+        y,
+        opacity,
+        scale,
+        filter: `blur(${blur}px)`
+      }}
+      className="absolute inset-0 flex flex-col justify-center"
+    >
+      <div className="flex items-start gap-3">
+        <div>
+          <h2 className="text-white font-black text-[90px] leading-[0.82] tracking-[-5px]">
+            {item.title}
+          </h2>
+
+          <h3 className="text-white/35 font-black text-[80px] leading-[0.82] tracking-[-5px] -mt-2">
+            {item.subtitle}
+          </h3>
+        </div>
+
+        <span className="text-white/70 text-sm mt-5">{item.year}</span>
+      </div>
+
+      <div className="mt-5 h-16 w-[75%] bg-white/10 blur-3xl rounded-full" />
+    </motion.div>
+  )
+}
 
 export default function AnimatedSection() {
   const sectionRef = useRef(null)
 
-  // scroll progress (0 → 1 inside section)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end']
   })
 
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useMotionValueEvent(scrollYProgress, 'change', latest => {
+    const total = projects.length
+    const current = Math.min(total - 1, Math.floor(latest * total))
+
+    setActiveIndex(current)
+  })
+
+
   return (
-    <section>
-      <section
-        ref={sectionRef}
-        className="relative h-[300vh] my-14 rounded-3xl bg-black"
-      >
-        {/* STICKY CONTAINER */}
-        <div className="sticky top-0 h-screen flex overflow-hidden">
-          {/* LEFT TEXT */}
-          <div className="w-1/2 flex flex-col justify-center px-16 space-y-6">
-            {texts.map((text, i) => {
-              const start = i / texts.length
-              const end = (i + 1) / texts.length
+    <section className="bg-[#efefef] py-8 md:py-12">
+      {/* BIG SCROLL AREA */}
+      <section ref={sectionRef} className="relative h-[500vh]">
+        {/* FIXED / STICKY SECTION */}
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <div className="h-full rounded-[30px] bg-black overflow-hidden">
+            <div className="grid lg:grid-cols-2 h-full">
+              {/* LEFT TEXT */}
+              <div className="relative h-full flex items-center px-5 md:px-10 lg:px-14 overflow-hidden bg-black">
+                {/* FEATURED WORK */}
+                <div className="absolute top-16 left-5 md:left-10 lg:left-14 z-50">
+                  <p className="text-white text-xl md:text-2xl font-semibold tracking-tight">
+                    Featured Work
+                  </p>
+                </div>
 
-              const opacity = useTransform(
-                scrollYProgress,
-                [start, end],
-                [1, 0.2]
-              )
+                {/* TEXT AREA */}
+                <div className="relative w-full h-105 overflow-hidden">
+                  {projects.map((item, i) => (
+                    <ProjectTextItem
+                      key={item.id}
+                      item={item}
+                      i={i}
+                      scrollYProgress={scrollYProgress}
+                      total={projects.length}
+                    />
+                  ))}
+                </div>
+              </div>
 
-              const y = useTransform(scrollYProgress, [start, end], [0, -100])
-
-              const blur = useTransform(
-                scrollYProgress,
-                [start, end],
-                ['0px', '6px']
-              )
-
-              return (
-                <motion.h2
-                  key={i}
+              {/* RIGHT IMAGE SECTION */}
+              <div className="relative h-full overflow-hidden px-4 md:px-6 lg:px-8 py-5">
+                {/* IMAGE COLUMN */}
+                <motion.div
                   style={{
-                    opacity,
-                    y,
-                    filter: blur
+                    y: useTransform(scrollYProgress, [0, 1], ['0%', '-75%'])
                   }}
-                  className="text-5xl font-bold text-white"
+                  className="flex flex-col gap-7"
                 >
-                  {text}
-                </motion.h2>
-              )
-            })}
-          </div>
-
-          {/* RIGHT CARDS */}
-          <div className="w-1/2 relative flex items-center justify-center">
-            <div className="relative h-[80vh] w-[320px]">
-              {cards.map((card, i) => {
-                const y = useTransform(
-                  scrollYProgress,
-                  [0, 1],
-                  [i * 120, -i * 200]
-                )
-
-                const scale = useTransform(
-                  scrollYProgress,
-                  [0, 1],
-                  [1, 1 - i * 0.05]
-                )
-
-                return (
-                  <motion.div
-                    key={card.id}
-                    style={{ y, scale }}
-                    className="absolute w-full h-105 rounded-xl overflow-hidden group cursor-none"
-                  >
-                    {/* IMAGE */}
-                    <img
-                      src={card.img}
-                      className="w-full h-full object-cover"
+                  {projects.map((item, i) => (
+                    <ImageCard
+                      key={item.id}
+                      item={item}
+                      active={activeIndex === i}
                     />
-
-                    {/* OVERLAY */}
-                    <motion.div
-                      initial={{ y: '100%' }}
-                      whileHover={{ y: '0%' }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0 bg-blue-500"
-                    />
-
-                    {/* TEXT */}
-                    <motion.div
-                      initial={{ y: '100%' }}
-                      whileHover={{ y: '0%' }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
-                      className="absolute bottom-0 p-6 text-white z-10"
-                    >
-                      <h3 className="text-xl font-semibold">{card.title}</h3>
-                    </motion.div>
-
-                    {/* CUSTOM CURSOR HOVER */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <motion.div
-                        initial={{ scale: 0, opacity: 0 }}
-                        whileHover={{ scale: 1, opacity: 1 }}
-                        className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center"
-                      >
-                        <ArrowUpRight className="text-white" />
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                )
-              })}
+                  ))}
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <div className="flex items-center justify-center">
-        <button className="bg-white flex items-center justify-center text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-100">Explore Our Work <ArrowUpRight/> </button>
-      </div>
     </section>
+  )
+}
+
+/* ================================================= */
+/* IMAGE CARD */
+/* ================================================= */
+
+function ImageCard({ item, active }) {
+  const [hovered, setHovered] = useState(false)
+
+  /* DYNAMIC CURSOR POSITION */
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0
+  })
+
+  /* MOUSE MOVE */
+  const handleMouseMove = e => {
+    const rect = e.currentTarget.getBoundingClientRect()
+
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    })
+  }
+
+  return (
+    <motion.div
+      animate={{
+        scale: active ? 1 : 0.92,
+        opacity: active ? 1 : 0.45
+      }}
+      transition={{
+        duration: 0.5
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseMove={handleMouseMove}
+      className="
+      group
+      relative
+      h-80
+      sm:h-90
+      md:h-105
+      lg:h-107.5
+      rounded-[26px]
+      overflow-hidden
+      cursor-none
+      "
+    >
+      {/* IMAGE */}
+      <img src={item.image} alt="" className="w-full h-full object-cover" />
+
+      {/* HOVER COLOR */}
+      <motion.div
+        initial={{ y: '100%' }}
+        animate={{
+          y: hovered ? '0%' : '100%'
+        }}
+        transition={{
+          duration: 0.55,
+          ease: [0.22, 1, 0.36, 1]
+        }}
+        className="absolute inset-0 bg-[#dcc0b0]"
+      />
+
+      {/* CONTENT */}
+      <div className="absolute inset-0 z-20 p-5 md:p-7 flex flex-col justify-between">
+        {/* TOP TEXT */}
+        <div className="overflow-hidden">
+          <motion.h2
+            initial={{
+              y: 120,
+              opacity: 0
+            }}
+            animate={{
+              y: hovered ? 0 : 120,
+              opacity: hovered ? 1 : 0
+            }}
+            transition={{
+              duration: 0.55,
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            className="
+            max-w-130
+            text-black
+            font-black
+            leading-[0.9]
+            tracking-[-3px]
+            text-[34px]
+            md:text-[48px]
+            lg:text-[62px]
+          "
+          >
+            A B2B success story for {item.subtitle}
+          </motion.h2>
+        </div>
+
+        {/* BOTTOM TAG */}
+        <motion.div
+          initial={{
+            y: 80,
+            opacity: 0
+          }}
+          animate={{
+            y: hovered ? 0 : 80,
+            opacity: hovered ? 1 : 0
+          }}
+          transition={{
+            duration: 0.55,
+            delay: 0.05,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+          className="flex justify-end"
+        >
+          <div
+            className="
+            flex
+            items-center
+            gap-2
+            bg-white/40
+            backdrop-blur-xl
+            px-4
+            py-2
+            rounded-full
+            text-black
+          "
+          >
+            <Search size={18} />
+
+            <span className="text-sm md:text-base">{item.subtitle}</span>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* DYNAMIC CURSOR */}
+      <motion.div
+        animate={{
+          x: mousePosition.x - 55,
+          y: mousePosition.y - 55,
+          scale: hovered ? 1 : 0,
+          opacity: hovered ? 1 : 0
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 260,
+          damping: 20
+        }}
+        className="
+        absolute
+        top-0
+        left-0
+        z-100
+        pointer-events-none
+        "
+      >
+        <div
+          className="
+          w-27.5
+          h-27.5
+          rounded-full
+          bg-[#a8e7db]
+          flex
+          items-center
+          justify-center
+          shadow-2xl
+        "
+        >
+          <ArrowUpRight size={42} className="text-black" />
+        </div>
+      </motion.div>
+
+      {/* DARK GRADIENT */}
+      <div className="absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent" />
+    </motion.div>
   )
 }

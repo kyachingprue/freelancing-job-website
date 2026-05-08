@@ -18,7 +18,7 @@ const HoverText = () => {
     <motion.div
       initial="initial"
       whileHover="hover"
-      className="relative w-full h-5 overflow-hidden text-sm font-bold text-[#111212] cursor-pointer"
+      className="relative w-full h-10 md:h-5 overflow-hidden text-sm font-bold text-[#111212] cursor-pointer"
     >
       {/* TOP TEXT */}
       <motion.div
